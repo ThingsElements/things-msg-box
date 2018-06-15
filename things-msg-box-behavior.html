@@ -85,6 +85,9 @@ Copyright © HatioLab Inc. All rights reserved.
      * @param {Object} config #### :MessageBox 구성을 위한 Configuration
      */
     openInfoMsg: function (config) {
+      //text의 true가 출력되기 때문에 그 부분 없애려고 수정
+      config.html = config.text;
+      delete config.text;
       swal(config);
     },
     /**
@@ -96,7 +99,7 @@ Copyright © HatioLab Inc. All rights reserved.
      */
     openConfirmMsg: function (config, okCallback, cancelCallback) {
       swal(config).then(result => {
-        if(result.value) {
+        if (result.value) {
           if (okCallback) okCallback();
         } else {
           if (cancelCallback) cancelCallback();
@@ -112,7 +115,7 @@ Copyright © HatioLab Inc. All rights reserved.
     openPromptMsg: function (config, promptCallback) {
       var newConfig = Object.assign({}, config, {
         preConfirm: (input) => {
-          if(!input) {
+          if (!input) {
             swal.showValidationError(Things.DataGlobal.t('error.SHOULD_NOT_BE_EMPTY', {
               value: 'input'
             }));
@@ -219,4 +222,5 @@ Copyright © HatioLab Inc. All rights reserved.
     Things.MsgBoxBehaviorImpl,
     Things.ViewOpenBehavior
   ];
+
 </script>
